@@ -1,0 +1,41 @@
+{
+	"cSpell.words": [
+		"cloudinary",
+		"clsx",
+		"fedcm",
+		"tailwindcss",
+		"tanstack",
+		"TRPC",
+		"xresume"
+	],
+	"files.eol": "\n",
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": true
+	},
+	"workbench.tree.renderIndentGuides": "none",
+	"workbench.editor.closeOnFileDelete": true,
+	"workbench.layoutControl.enabled": false,
+	"workbench.editor.tabCloseButton": "off",
+	"workbench.list.smoothScrolling": true,
+	"workbench.startupEditor": "none",
+	"editor.find.addExtraSpaceOnTop": false,
+	"editor.renderWhitespace": "none",
+	"editor.inlineSuggest.enabled": false,
+	"editor.accessibilitySupport": "off",
+	"editor.insertSpaces": true,
+	"editor.minimap.enabled": false,
+	"editor.renderLineHighlight": "none",
+	"editor.hideCursorInOverviewRuler": true,
+	"editor.overviewRulerBorder": false,
+	"editor.occurrencesHighlight": false,
+	"editor.folding": false,
+	"editor.tabSize": 2,
+	"editor.matchBrackets": "never",
+	"editor.glyphMargin": false,
+	"explorer.openEditors.visible": 0,
+	"zenMode.hideActivityBar": true,
+	"workbench.editor.showIcons": false,
+	"workbench.statusBar.visible": false,
+	"workbench.activityBar.location": "hidden"
+}

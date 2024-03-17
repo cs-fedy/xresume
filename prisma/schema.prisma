@@ -1,0 +1,124 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int    @id @default(autoincrement())
+  role  String @default("user")
+  email String @unique
+
+  createdAt   DateTime @default(now()) @map("created_at")
+  isFirstTime Boolean  @default(true) @map("is_first_time")
+
+  // personal information
+  fullName          String  @map("full_name")
+  profilePictureURL String? @map("profile_picture_url")
+  phoneNumber       String  @default("-") @map("phone_number")
+  address           String  @default("-")
+
+  resumeObjectiveSummary String @default("-") @map("resume_objective_summary")
+
+  // work experience is a list of rows separated by \n
+  // each row follows this format: 
+  // company_name \t job_title \t start_date \t end_date \t key_responsibilities(achievements) 
+  workExperience String @default("-") @map("work_experience")
+
+  // education is a list of rows separated by \n
+  // each row follows this format: 
+  // earned_degree \t institution_name \t start_date \t graduation_date
+  education String @default("-")
+
+  // skills
+  // each column is a list of rows separated by \n
+  softSkills      String @default("-") @map("soft_skills")
+  technicalSkills String @default("-") @map("technical_skills")
+  // each row follows this format: 
+  // title \t date \t description 
+  awards          String @default("-") @map("awards")
+  achievements    String @default("-") @map("achievements")
+  certifications  String @default("-") @map("certifications")
+
+  // additional sections
+  // each column is a list of rows separated by \n
+  spokenLanguages        String @default("-") @map("spoken_languages")
+  interestsHobbies       String @default("-") @map("interests_hobbies")
+  // each row follows this format: 
+  // job_title \t start_date \t end_date \t description 
+  volunteerWork          String @default("-") @map("volunteer_work")
+  associativeExperiences String @default("-") @map("associative_experiences")
+
+  Session Session[]
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
+  token     String
+  ownerId   Int      @map("owner_id")
+  expiresIn DateTime @map("expires_in")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  owner User @relation(fields: [ownerId], references: [id])
+}
+
+model Template {
+  id          Int     @id @default(autoincrement())
+  templateURL String  @map("template_url")
+  isPublic    Boolean
+
+  name        String
+  description String
+  keywords    String
+
+  // categroy can be:
+  category String
+
+  // - european: 
+  // Follows the Europass format, commonly used in Europe, which emphasizes skills and competencies
+  // Includes sections such as personal information, education, work experience, skills, and additional information.
+
+  // - american:
+  // Organizes work experience in reverse chronological order, highlighting recent roles first.
+  // Focuses on detailing job responsibilities and achievements to showcase career progression.
+
+  // - academic:
+  // Focuses on academic achievements, research experience, publications, and grants.
+  // Includes sections such as education, research experience, teaching experience, publications, presentations, and grants/awards.
+
+  // - creative:
+  // Incorporates visually appealing design elements, such as colors, icons, and creative layouts.
+  // Suitable for creative professionals in fields like graphic design, advertising, and marketing.
+
+  // - technical:
+  // Highlights technical skills, certifications, and proficiency in relevant software and tools.
+  // Provides detailed descriptions of technical projects, problem-solving approaches, and innovations.
+
+  // - executive:
+  // Tailored for senior-level professionals or executives.
+  // Emphasizes leadership experience, strategic accomplishments, and industry expertise.
+  // May include sections such as executive summary, board memberships, and speaking engagements.
+
+  // - entry-level:
+  // Designed for recent graduates or individuals with limited work experience.
+  // Highlights education, internships, volunteer work, and relevant skills.
+  // May include a career objective or summary to showcase career goals and aspirations.
+
+  // - functional:
+  // Emphasizes skills and accomplishments rather than chronological work history.
+  // Suitable for career changers, those with employment gaps, or individuals with diverse skill sets.
+
+  // - combination:
+  // Combines elements of both chronological and functional formats.
+  // Highlights both work experience and key skills.
+  // Suitable for showcasing specific skills while providing a chronological overview of your career.
+}
