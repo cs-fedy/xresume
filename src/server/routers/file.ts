@@ -22,7 +22,7 @@ function uploadStreamAsync(stream: ReadableStream) {
 }
 
 export const fileRouter = router({
-	uploadHandler: protectedProcedure
+	upload: protectedProcedure
 		.use(async opts => {
 			const formData = await parseMultipartFormData(
 				opts.ctx.request,
@@ -31,11 +31,11 @@ export const fileRouter = router({
 
 			return opts.next({ getRawInput: async () => ({ formData }) })
 		})
-		.input(zfd.formData({ image: zfd.file() }))
+		.input(zfd.formData({ file: zfd.file() }))
 		.mutation(async options => {
 			try {
 				const uploadedFileURL = await uploadStreamAsync(
-					options.input.image.stream(),
+					options.input.file.stream(),
 				)
 
 				return {

@@ -74,7 +74,7 @@ model Session {
 model Template {
   id          Int     @id @default(autoincrement())
   templateURL String  @map("template_url")
-  isPublic    Boolean
+  isPublic    Boolean @default(true)
 
   name        String
   description String

@@ -63,7 +63,7 @@ export const onboardingSchema = z.object({
 	associativeExperiences: volunteerWorkLikeSchema,
 })
 
-export type OnboardingArgs = z.infer<typeof onboardingSchema>
+type OnboardingArgs = z.infer<typeof onboardingSchema>
 
 type OnboardingHandlerArgs = {
 	args: OnboardingArgs
