@@ -1,4 +1,4 @@
-type ParsedLine = {
+export type ParsedLine = {
 	type: string
 	content?: string
 	name?: string
@@ -17,6 +17,7 @@ export function parseLine(line: string): Array<ParsedLine> {
 			return { type: "content", content: match[4] }
 		const [_, name, options, rawArguments] = match
 
+		// TODO: fix regex returns only one argument
 		const argumentsArr = rawArguments
 			? rawArguments.split("{}").filter(arg => arg !== "")
 			: undefined

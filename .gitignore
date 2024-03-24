@@ -3,3 +3,4 @@
 **/build/
 **/.env*
 **/example.tex
+**/result.json
