@@ -33,7 +33,10 @@ export class Latex {
 					// handle new block
 					const newBlockResult = this.handleNewBlock(parsedTex, currentIndex)
 					currentIndex = newBlockResult.endOfBlockIndex
-					this.content.push(newBlockResult.content)
+					this.content.push({
+						blockName: currentLine.arguments ? currentLine.arguments[0] : "",
+						content: newBlockResult.content,
+					})
 				} else {
 					// handle normal command
 					this.content.push({
